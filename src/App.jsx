@@ -2,32 +2,44 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import { Link, Route, Routes } from 'react-router-dom'
+import Login from './login'
+import Lead from './Lead/Lead'
+import AButton from './AButton'
+import RequireAuth from './private/RequireAuth'
+import ReactHook from './ReactHook'
+import ABC from './ABC'
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+   
+      <ul>
+
+        <li>
+          <Link to='/' >Login</Link>
+        </li>
+
+        <li>
+        <Link to='/lead' >Lead</Link>
+          
+        </li>
+
+      </ul>
+
+      <Routes>
+
+        <Route path='/' element={<Login/>}/>
+        <Route path='/react1' element={<ABC/>}>
+
+          <Route path='default' element={<ReactHook></ReactHook>}></Route>
+
+        </Route>
+        <Route path='/lead' element={ <RequireAuth> <Lead/></RequireAuth>} />
+        
+      </Routes>
     </>
   )
 }

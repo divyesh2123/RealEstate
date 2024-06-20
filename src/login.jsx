@@ -4,6 +4,7 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import { Button, TextField } from "@mui/material";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const validationSchema = yup.object({
   username: yup
@@ -17,6 +18,8 @@ const validationSchema = yup.object({
 });
 
 const Login = () => {
+
+  const anav = useNavigate();
   const formik = useFormik({
     initialValues: {
       username: "admin@gmail.com",
@@ -27,9 +30,16 @@ const Login = () => {
       axios
         .post("http://127.0.0.1:5001/api/user/login", values)
         .then(y => {localStorage.setItem("token", JSON.stringify(y.data));
-            console.log(y);
+           
+          if(y.status == 200 || y.status == 201)
+            {
+            anav("/lead");
+            }
         }
-    );
+    ).catch(y=>{
+
+
+    });
     
     },
   });
