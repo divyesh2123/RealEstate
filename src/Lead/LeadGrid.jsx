@@ -132,11 +132,12 @@ export default function LeadGrid(props) {
         columns={columns}
         onRowSelectionModelChange={(newRowSelectionModel) => {
          
+          alert(newRowSelectionModel);
          
           setids(newRowSelectionModel);
-          setRowSelectionModel(newRowSelectionModel);
+         
         }}
-        rowSelectionModel={rowSelectionModel}
+      
         initialState={{
           pagination: {
             paginationModel: {
