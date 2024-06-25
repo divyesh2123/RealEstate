@@ -35,6 +35,7 @@ export default function LeadGrid(props) {
   }
 
   const [data, setData] = useState([]);
+  const [rowSelectionModel, setRowSelectionModel] = useState([]);
 
   useEffect(() => {
     authFetch.get("/lead/").then((y) => {
@@ -124,9 +125,18 @@ export default function LeadGrid(props) {
   ];
   return (
     <Box sx={{ height: 600, width: "100%" }}>
+
+     { id.length >=1 && <Button onClick={handleDelete}>Delete</Button> } 
       <DataGrid
         rows={data}
         columns={columns}
+        onRowSelectionModelChange={(newRowSelectionModel) => {
+         
+         
+          setids(newRowSelectionModel);
+          setRowSelectionModel(newRowSelectionModel);
+        }}
+        rowSelectionModel={rowSelectionModel}
         initialState={{
           pagination: {
             paginationModel: {
